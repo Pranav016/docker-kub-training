@@ -16,4 +16,4 @@ spec:
         spec:
             containers:
                 - name: node
-                  image: pranav016/node-app:1.0
+                  image: pranav016/node-app:v1

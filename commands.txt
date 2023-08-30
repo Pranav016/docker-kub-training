@@ -1,0 +1,24 @@
+minikube start
+minikiube status
+docker ps 
+docker ps -a
+docker images
+docker login
+docker logout
+docker build -t pranav016/node-app:v1 .
+docker images
+docker run -p 3000:3000 -d image-name
+docker stop
+docker kill
+kubectl get pods
+kubectl get deployments
+kubectl get services
+kubectl apply -f=deployment.yaml
+kubectl apply -f=service.yaml
+kubectl get deployments
+kubectl get services
+minikube service service-name
+- try new image and deploy
+kubectl rollout status deployment/<deployment-name>
+kubectl rollout history deployment/<deployment-name>
+kubectl rollout undo deployment/<deployment-name> --revision=<revision-no-from-history>

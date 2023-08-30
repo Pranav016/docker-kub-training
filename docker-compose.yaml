@@ -1,0 +1,48 @@
+version: '3.8'
+services:
+    mongodb:
+        image: 'mongo'
+        container_name: mongodb
+        volumes:
+            - data:/data/db
+        environment:
+          MONGO_INITDB_ROOT_USERNAME: pranav
+          MONGO_INITDB_ROOT_PASSWORD: secret
+        env_file:
+            - ./env/mongo.env
+        # we don't need add network since docker compose puts all the services defined in the same file in a particular network
+    backend:
+        build: ./backend
+        ports:
+            - '80:80'
+        volumes:
+            - logs:/app/logs
+            - ./backend:/app #bind mount (path relative from docker-compose.yaml)
+            - /app/node_modules # anonymous volume
+        env_file:
+            - ./env/backend.env
+        depends_on:
+            - mongodb
+    frontend:
+        build: ./frontend
+        ports:
+            - '3000:3000'
+        volumes:
+            - ./frontend/src:/app/src
+        stdin_open: true
+        tty: true # add terminal
+        depends_on:
+            - backend
+
+#named volumes need to be specified like this
+volumes:
+    data:
+    logs:
+#starts container
+#docker compose up -d
+
+#stops container, also removes the container by default
+#docker compose down
+
+# removes volumes
+#docker compose down -v
